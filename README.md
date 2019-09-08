@@ -414,7 +414,8 @@ Output:
 ["Lee", "Hi"]
 ```
 ## 36 - Framework Aside Function Overloading
-You can call one function which inside calls another function with a certain set of parameters.
+In JS, there is no same 'overloading' like cpp or Java, because in JS, every function is an object.
+But we can call one function which inside calls another function with a certain set of parameters to achieve the effect the "overloading" does.
 
 ## 37 - Conceptual Aside  - Syntax Parsers
 JavaScript engine is syntax parser in the browser.
