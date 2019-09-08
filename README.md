@@ -403,7 +403,16 @@ Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
 **Arguments** are the parameters you pass to a function. JS creates a keyword of the same name which is an array-like that contains all parameters that you passed.
 
 In ES6 we can do: `function greet(firstname, ...other)` and `other` will be an array that contains the rest of the arguments.
+```javascript
+function greet(firstname, ...other) {
+  console.log(other);
+}
 
+greet('Jason', 'Lee', 'Hi');
+
+Output:
+["Lee", "Hi"]
+```
 ## 36 - Framework Aside Function Overloading
 You can call one function which inside calls another function with a certain set of parameters.
 
