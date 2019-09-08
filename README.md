@@ -373,6 +373,29 @@ But `this` inside a function which is inside a method will point to the global o
 
 With ES5 JavaScript using `var` you could solve this by setting inside a method `var _this = this;` which is a very common pattern.
 
+```javascript
+(function a() {
+  console.log(this);
+})();
+
+b = {
+  a: function a() {
+    console.log(this);
+    function c() {
+      console.log(this);
+    }
+    c();
+  }
+};
+
+b.a();
+
+Output:
+Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
+app.js:7 {a: ƒ}
+app.js:9 Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
+```
+
 ## 34 - Conceptual Aside - Arrays  - Collections of Anything
 **Arrays** can hold a mix of anything: functions, primitives, objects.
 
