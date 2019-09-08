@@ -487,9 +487,83 @@ Because functions are objects, all functions have access to built-in `call()`, `
 
 **`apply()`** is almost the same as `call()` but instead you need to pass an array as a parameter: `.apply(object, [parameters])`
 
+```javascript
+var person = {
+    firstname: 'John',
+    lastname: 'Doe',
+    getFullName: function() {
+        
+        var fullname = this.firstname + ' ' + this.lastname;
+        return fullname;
+        
+    }
+}
+
+var logName = function(lang1, lang2) {
+
+    console.log('Logged: ' + this.getFullName());
+    console.log('Arguments: ' + lang1 + ' ' + lang2);
+    console.log('-----------');
+    
+}
+
+var logPersonName = logName.bind(person);
+logPersonName('en');
+
+logName.call(person, 'en', 'es');
+logName.apply(person, ['en', 'es']);
+
+(function(lang1, lang2) {
+
+    console.log('Logged: ' + this.getFullName());
+    console.log('Arguments: ' + lang1 + ' ' + lang2);
+    console.log('-----------');
+    
+}).apply(person, ['es', 'en']);
+
+// function borrowing
+var person2 = {
+    firstname: 'Jane',
+    lastname: 'Doe'
+}
+
+console.log(person.getFullName.apply(person2));
+
+Output:
+Logged: John Doe
+Arguments: en undefined
+-----------
+Logged: John Doe
+Arguments: en es
+-----------
+Logged: John Doe
+Arguments: en es
+-----------
+Logged: John Doe
+Arguments: es en
+-----------
+Jane Doe
+```
+
 In practice, you can use `call()` and `apply()` to borrow methods/functions from objects and use on another object with the same property names.
 
 **Function currying** - creating a copy of a function but with some preset parameters.
+```javascript
+// function currying
+function multiply(a, b) {
+    return a*b;   
+}
+
+var multipleByTwo = multiply.bind(this, 2);
+console.log(multipleByTwo(4));
+
+var multipleByThree = multiply.bind(this, 3);
+console.log(multipleByThree(4));
+
+Output:
+8
+12
+```
 
 ## 47 - Functional Programming
 A mapping function is a function which takes one array and outputs another array. It is very powerful and useful technique that you will see in codebases.
