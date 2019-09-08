@@ -602,7 +602,7 @@ Each object inherits properties and methods of other objects through a prototype
 ## 51 - Everything is an Object (Or a primitive)
 Functions, arrays, and objects all have their prototype that's why we say that everything is an object in JavaScript.
 
-All objects, functions, arrays have their prototype pointing to the special object where you can access methods like `call()`, `bind()`, `push()`. 
+All objects, functions, arrays have their prototype pointing to the special object where you can access methods like `call()`, `bind()`, `apply()`. 
 
 ## 52 - Reflection and Extend
 **Reflection** - an object can look at itself, listing and changing its properties and methods.
