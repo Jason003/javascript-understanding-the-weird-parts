@@ -392,8 +392,8 @@ b.a();
 
 Output:
 Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
-app.js:7 {a: ƒ}
-app.js:9 Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
+{a: ƒ}
+Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
 ```
 
 ## 34 - Conceptual Aside - Arrays  - Collections of Anything
