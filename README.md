@@ -642,6 +642,22 @@ app.js:9 Person {firstname: "Jane", lastname: "Lee"}
 A `.prototype` is **not** *the* prototype of a function object. It is only a prototype of objects created with a `new` keyword.
 
 It's better to put your methods on the `prototype` to save memory space as it gets shared between all objects.
+```javascript
+function Person(firstname, lastname) {
+  this.firstname = firstname;
+  this.lastname = lastname;
+}
+
+Person.prototype.printName = function() {
+  console.log(this.firstname + ' ' + this.lastname);
+};
+
+var jane = new Person('Jane', 'Lee');
+jane.printName();
+
+Output:
+Jane Lee
+```
 
 ## 55 - Dangerous Aside `new` and functions
 Any function that we intend to use as a function constructor should be named with a first capital letter. This makes it easier to spot errors in case you would miss `new` keyword.
@@ -680,26 +696,49 @@ a === b // will return false because we are comparing object with a primitive
 
 ## 58 - Dangerous Aside Arrays and `for`..`in`
 For arrays use standard `for` loop or `forEach`, but don't use `for in`. Because arrays are objects with `for in` you could iterate into a prototype.
+```javascript
+Array.prototype.myCustomFeature = 'Jason';
+
+arr = ['Jane', 'Amy'];
+
+for (var k in arr) {
+  console.log(k + ' : ' + arr[k]);
+}
+
+console.log('------------');
+
+arr.forEach(element => {
+  console.log(element);
+});
+
+Output:
+app.js:6 0 : Jane
+app.js:6 1 : Amy
+app.js:6 myCustomFeature : Jason
+app.js:9 ------------
+app.js:12 Jane
+app.js:12 Amy
+```
 
 ## 59 - `Object.create` and Pure Prototypal Inheritance
 ```javascript
 var person = {
-    firstname: 'Default',
-    lastname: 'Default',
-    greet: function() {
-        return 'Hi ' + this.firstname;   
-    }
-}
+  firstname: 'Default',
+  lastname: 'Default',
+  greet: function() {
+    console.log('Hi ' + this.firstname);
+  }
+};
 
 var john = Object.create(person);
+john.firstname = 'John';
+john.greet();
+
+Output:
+Hi John
 ```
 
 `Object.create(person)` - creates an empty object with its prototype pointing at whatever you passed in as a parameter.
-
-```javascript
-john.firstname = 'John';
-john.lastname = 'Doe';
-```
 
 And you can override properties and methods by adding new ones to this object with the same names.
 
@@ -712,6 +751,30 @@ JavaScript has classes in ES6. However, it is not like a `class` in other langua
 
 **Syntactic sugar** - a different way to type something that doesn't change how it works under the hood.
 
+```javascript
+class Person {
+  constructor(firstname, lastname) {
+    this.firstname = firstname;
+    this.lastname = lastname;
+  }
+
+  printName() {
+    console.log(this.firstname + ' ' + this.lastname);
+  }
+}
+
+class Jason extends Person {
+  constructor(firstname, lastname) {
+    super(firstname, lastname);
+  }
+}
+
+jason = new Jason('Jason', 'Li');
+jason.printName();
+
+Output:
+Jason Li
+```
 ## 61 - Initialization
 Large arrays of objects are useful for testing and initialization before you have an actual data to pull from, like a JSON file.
 
