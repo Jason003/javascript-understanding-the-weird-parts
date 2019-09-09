@@ -619,6 +619,22 @@ It is not a built in feature but many libraries have it and ES6 have `extends`.
 **Function constructors** - a normal function that is used to construct objects. The `this` variable points to a new empty object, and that object is returned from the function automatically.
 
 `new` keyword creates an object and functions constructors are used for adding properties and methods to that object.
+```javascript
+function Person(firstname, lastname) {
+  console.log(this);
+  this.firstname = firstname;
+  this.lastname = lastname;
+  console.log('This function has invoked');
+}
+
+var jane = new Person('Jane', 'Lee');
+console.log(jane);
+
+Output:
+app.js:2 Person {}
+app.js:5 This function has invoked
+app.js:9 Person {firstname: "Jane", lastname: "Lee"}
+```
 
 ## 54 - Function Constructors and `.prototype`
 **`.prototype`** is a property that sits in every function in JavaScript but unless you use a function constructor with `new` operator it is never used.
